@@ -25,10 +25,10 @@ gulp.task('build-js', function () {
 });
 
 gulp.task('build-css', function() {
-    return gulp.src('./assets/scss/*.scss')
-    .pipe(sass(
-      {includePaths: ['./node_modules/bootstrap/scss']}
-      ).on('error', sass.logError))
+    return gulp.src('./assets/scss/**/*.scss')
+    .pipe(sass({
+        includePaths: ['./node_modules/bootstrap/scss']})
+      .on('error', sass.logError))
     .pipe(gulp.dest('./build/css/'))
     .pipe(browserSync.stream({match: '**/*.css'}));
 });
@@ -40,6 +40,6 @@ gulp.task('watch-js', ['build-js'], function(done) {
 
 
 gulp.task('watch', ['serve'], function() {
-  gulp.watch('assets/scss/*.scss',['build-css']);
+  gulp.watch('assets/scss/**/*.scss',['build-css']);
   gulp.watch('assets/js/**/*.js',['watch-js']);
 });
